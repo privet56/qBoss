@@ -1,0 +1,22 @@
+QWidget#jbossstartscript, QWidget#jbosstempcleanup, QWidget#jbossdeploywar
+{
+	border-style:outset;
+	border-width:2px;
+	border-color: beige;
+}
+/*
+QPushButton
+{
+    background-color: #e6eaf2;
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: white/*beige* /;
+    padding: 6px;
+}
+QPushButton:pressed
+{
+    background-color: lightgray/*rgb(224, 0, 0)* /;
+    border-style: inset;
+}
+*/
