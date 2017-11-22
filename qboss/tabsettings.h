@@ -15,6 +15,8 @@ public:
     explicit TabSettings(QWidget *parent = 0);
     ~TabSettings();
 
+    void activateAnis(QObjectList& children);
+
 private slots:
     void on_jbossstartscript_browse_pressed();
 

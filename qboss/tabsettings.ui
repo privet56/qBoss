@@ -97,7 +97,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="QLabel" name="jbossstartscript_ok_label">
+        <widget class="anilabel" name="jbossstartscript_ok_label">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -118,6 +118,9 @@
            <height>22</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>wrong</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -125,7 +128,7 @@
           <enum>Qt::AutoText</enum>
          </property>
          <property name="pixmap">
-          <pixmap resource="res.qrc">:/res/nok.png</pixmap>
+          <pixmap resource="res.qrc">:/res/wrong.gif</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -135,6 +138,9 @@
          </property>
          <property name="wordWrap">
           <bool>false</bool>
+         </property>
+         <property name="buddy">
+          <cstring>wrong</cstring>
          </property>
         </widget>
        </widget>
@@ -231,6 +237,9 @@
       </sizepolicy>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QPushButton" name="startB">
         <property name="sizePolicy">
@@ -287,9 +296,33 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="anilabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>99</width>
+          <height>66</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>bunny_sleep</string>
+        </property>
         <property name="text">
-         <string>Stopped</string>
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="res.qrc">:/res/bunny_sleep.gif</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="buddy">
+         <cstring>bunny_sleep</cstring>
         </property>
        </widget>
       </item>
@@ -362,7 +395,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="QLabel" name="jbossstartscript_ok_label_2">
+        <widget class="anilabel" name="jbossstartscript_ok_label_2">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -383,6 +416,9 @@
            <height>22</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>inactive</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -390,7 +426,7 @@
           <enum>Qt::AutoText</enum>
          </property>
          <property name="pixmap">
-          <pixmap resource="res.qrc">:/res/nok.png</pixmap>
+          <pixmap resource="res.qrc">:/res/inactive.gif</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -400,6 +436,9 @@
          </property>
          <property name="wordWrap">
           <bool>false</bool>
+         </property>
+         <property name="buddy">
+          <cstring>inactive</cstring>
          </property>
         </widget>
        </widget>
@@ -488,13 +527,13 @@
        <number>9</number>
       </property>
       <property name="topMargin">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
        <number>1</number>
       </property>
       <property name="bottomMargin">
-       <number>1</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QWidget" name="jbossconfigfiles_ok_widget" native="true">
@@ -510,7 +549,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="QLabel" name="jbossconfigfiles_ok_label">
+        <widget class="anilabel" name="jbossconfigfiles_ok_label">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -531,6 +570,9 @@
            <height>22</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>inactive</string>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -538,7 +580,7 @@
           <enum>Qt::AutoText</enum>
          </property>
          <property name="pixmap">
-          <pixmap resource="res.qrc">:/res/nok.png</pixmap>
+          <pixmap resource="res.qrc">:/res/inactive.gif</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -548,6 +590,9 @@
          </property>
          <property name="wordWrap">
           <bool>false</bool>
+         </property>
+         <property name="buddy">
+          <cstring>inactive</cstring>
          </property>
         </widget>
        </widget>
@@ -735,7 +780,7 @@
              <height>22</height>
             </size>
            </property>
-           <widget class="QLabel" name="jbossstartscript_ok_label_3">
+           <widget class="anilabel" name="jbossstartscript_ok_label_3">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -756,6 +801,9 @@
               <height>22</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>inactive</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -763,7 +811,7 @@
              <enum>Qt::AutoText</enum>
             </property>
             <property name="pixmap">
-             <pixmap resource="res.qrc">:/res/nok.png</pixmap>
+             <pixmap resource="res.qrc">:/res/inactive.gif</pixmap>
             </property>
             <property name="scaledContents">
              <bool>true</bool>
@@ -773,6 +821,9 @@
             </property>
             <property name="wordWrap">
              <bool>false</bool>
+            </property>
+            <property name="buddy">
+             <cstring>inactive</cstring>
             </property>
            </widget>
           </widget>
@@ -891,6 +942,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>anilabel</class>
+   <extends>QLabel</extends>
+   <header>util/anilabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="res.qrc"/>
  </resources>

@@ -27,14 +27,34 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     tabbrowser.cpp \
-    tabsettings.cpp
+    tabsettings.cpp \
+    util/anibutton.cpp \
+    util/cfg.cpp \
+    util/emitter.cpp \
+    util/f.cpp \
+    util/logger.cpp \
+    util/logwnd.cpp \
+    util/str.cpp \
+    util/tray.cpp \
+    util/w.cpp \
+    util/anilabel.cpp
 
 HEADERS += \
         mainwindow.h \
     tabbrowser.h \
     tabsettings.h \
     res.rc \
-    resource.h
+    resource.h \
+    util/anibutton.h \
+    util/cfg.h \
+    util/emitter.h \
+    util/f.h \
+    util/logger.h \
+    util/logwnd.h \
+    util/str.h \
+    util/tray.h \
+    util/w.h \
+    util/anilabel.h
 
 HEADERS  += resource.h
 

@@ -5,4 +5,4 @@
 GUI :
 #####
 
-![qboss_ui](https://raw.githubusercontent.com/privet56/qBoss/master/qboss_ui.png)
+![qboss_ui](https://raw.githubusercontent.com/privet56/qBoss/master/qboss_ui.gif)

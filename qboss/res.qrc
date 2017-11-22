@@ -3,5 +3,13 @@
         <file>res/styles.css</file>
         <file>res/nok.png</file>
         <file>res/ok.png</file>
+        <file>res/bun.png</file>
+        <file>res/bunny_run.gif</file>
+        <file>res/bunny_sleep.gif</file>
+        <file>res/settings.png</file>
+        <file>res/wip.png</file>
+        <file>res/good.gif</file>
+        <file>res/wrong.gif</file>
+        <file>res/inactive.gif</file>
     </qresource>
 </RCC>
