@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QList<int> sizes;
-    sizes << 1;
-    sizes << 3;
+    sizes << 1; //top area
+    sizes << 1; //bottom area (log wnd)
     this->ui->splitter->setSizes(sizes);
 }
 
