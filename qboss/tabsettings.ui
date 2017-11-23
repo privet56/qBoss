@@ -97,7 +97,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="anilabel" name="jbossstartscript_ok_label">
+        <widget class="anioklabel" name="jbossstartscript_ok_label">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -119,7 +119,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>wrong</string>
+          <string>inactive</string>
          </property>
          <property name="text">
           <string/>
@@ -140,7 +140,7 @@
           <bool>false</bool>
          </property>
          <property name="buddy">
-          <cstring>wrong</cstring>
+          <cstring>inactive</cstring>
          </property>
         </widget>
        </widget>
@@ -296,7 +296,7 @@
        </widget>
       </item>
       <item>
-       <widget class="anilabel" name="appServerStatusLabel">
+       <widget class="anioklabel" name="appServerStatusLabel">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -395,7 +395,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="anilabel" name="jbosstempcleanup_ok_label">
+        <widget class="anioklabel" name="jbosstempcleanup_ok_label">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -549,7 +549,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="anilabel" name="jbossconfigfiles_ok_label">
+        <widget class="anioklabel" name="jbossconfigfiles_ok_label">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -780,7 +780,7 @@
              <height>22</height>
             </size>
            </property>
-           <widget class="anilabel" name="jbossdeploywar_ok_label">
+           <widget class="anioklabel" name="jbossdeploywar_ok_label">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -944,9 +944,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>anilabel</class>
+   <class>anioklabel</class>
    <extends>QLabel</extends>
-   <header>util/anilabel.h</header>
+   <header>anioklabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

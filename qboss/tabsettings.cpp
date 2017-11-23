@@ -6,6 +6,7 @@
 
 TabSettings::TabSettings(QWidget *parent) :
     QWidget(parent),
+    m_appServerSettings(this),
     ui(new Ui::TabSettings),
     m_pLogger(nullptr)
 {
@@ -139,9 +140,11 @@ void TabSettings::on_restartB_clicked()
 
 }
 
-void TabSettings::on_jbossstartscript_edit_textChanged(const QString &arg1)
+void TabSettings::on_jbossstartscript_edit_textChanged(const QString &sAppServerStartScript)
 {
-
+    //TODO: set icon & buttons
+    bool bAppServerStartScriptIsValid = m_appServerSettings.setAppServerStartScript(sAppServerStartScript);
+    this->ui->jbossstartscript_ok_label->setAniState(bAppServerStartScriptIsValid ? anioklabel::OK : anioklabel::NOK);
 }
 
 void TabSettings::on_jbossstartscript_browse_clicked()

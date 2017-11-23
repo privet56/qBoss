@@ -1,18 +1,20 @@
 #include "anilabel.h"
 
-anilabel::anilabel(QWidget *parent) : QLabel(parent)
+anilabel::anilabel(QWidget *parent) : QLabel(parent), m_pMovie(nullptr)
 {
 
 }
 
 bool anilabel::setani(QString sRes)
 {
-    QMovie* pMovie = new QMovie(sRes);
-    connect(pMovie,SIGNAL(frameChanged(int)),this,SLOT(setLabelIcon(int)));
-    if (pMovie->loopCount() != -1) //if movie doesn't loop forever, force it to
-        connect(pMovie,SIGNAL(finished()),pMovie,SLOT(start()));
-    pMovie->start();
-    if(!pMovie->isValid())
+    cleanup();
+
+    m_pMovie = new QMovie(sRes);
+    connect(m_pMovie,SIGNAL(frameChanged(int)),this,SLOT(setLabelIcon(int)));
+    if (m_pMovie->loopCount() != -1) //if movie doesn't loop forever, force it to
+        connect(m_pMovie,SIGNAL(finished()),m_pMovie,SLOT(start()));
+    m_pMovie->start();
+    if(!m_pMovie->isValid())
     {
         //TODO: log correctly!
         //helpers::log("anibutton:setani NOT.ok("+sRes+"):"+QString::number(pMovie->isValid()), LOG_WRN, qApp, 0);
@@ -28,4 +30,15 @@ void anilabel::setLabelIcon(int frame)   // member function that catches the fra
     Q_UNUSED(frame)
     QMovie* pMovie = (QMovie*)sender();
     this->setPixmap(pMovie->currentPixmap());
+}
+
+void anilabel::cleanup()
+{
+    if(this->m_pMovie)
+    {
+        this->m_pMovie->disconnect();
+        this->m_pMovie->deleteLater();
+        delete this->m_pMovie;
+        this->m_pMovie = nullptr;
+    }
 }

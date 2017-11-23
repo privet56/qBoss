@@ -13,6 +13,8 @@ public:
     explicit anilabel(QWidget *parent = nullptr);
 
     bool setani(QString sRes);
+    void cleanup();
+    QMovie* m_pMovie;
 
 signals:
 

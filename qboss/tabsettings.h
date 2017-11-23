@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "util/cfg.h"
 #include "util/logger.h"
+#include "appservercontroller.h"
 
 namespace Ui {
 class TabSettings;
@@ -25,6 +26,7 @@ public:
 protected:
     bool eventFilter(QObject * obj, QEvent * event);
     void onCfg(QObjectList& children, int recDepth, bool bRead);
+    AppServerController m_appServerSettings;
 
 private slots:
 
