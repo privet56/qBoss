@@ -296,7 +296,7 @@
        </widget>
       </item>
       <item>
-       <widget class="anilabel" name="label_3">
+       <widget class="anilabel" name="appServerStatusLabel">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -395,7 +395,7 @@
           <height>22</height>
          </size>
         </property>
-        <widget class="anilabel" name="jbossstartscript_ok_label_2">
+        <widget class="anilabel" name="jbosstempcleanup_ok_label">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -677,7 +677,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QListWidget" name="listWidget">
+            <widget class="QListWidget" name="jbossconfigfiles_list">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -737,7 +737,7 @@
        <number>1</number>
       </property>
       <item>
-       <widget class="QWidget" name="jbossstartscript_4" native="true">
+       <widget class="QWidget" name="jbossdeploywar_widget" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -780,7 +780,7 @@
              <height>22</height>
             </size>
            </property>
-           <widget class="anilabel" name="jbossstartscript_ok_label_3">
+           <widget class="anilabel" name="jbossdeploywar_ok_label">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -829,7 +829,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QWidget" name="jbossstartscript_5" native="true">
+          <widget class="QWidget" name="jbossdeploywar_widget_2" native="true">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -871,7 +871,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox">
+               <widget class="QCheckBox" name="jbossdeploywar_watch_chk">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -883,7 +883,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_8">
                 <item>
-                 <widget class="QLineEdit" name="jbossstartscript_edit_2">
+                 <widget class="QLineEdit" name="jbossdeploywar_edit">
                   <property name="styleSheet">
                    <string notr="true"/>
                   </property>
@@ -893,7 +893,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="jbossstartscript_browse_2">
+                 <widget class="QPushButton" name="jbossdeploywar_browse_2">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>

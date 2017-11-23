@@ -17,6 +17,7 @@ public:
     enum LogLevel { DBG, INF, WRN, ERR };
 
     void SetLogWnd(LogWnd* pTeLog);
+    void init(cfg* pCfg, LogWnd* pTeLog);
     cfg* GetCfg();
 
 protected:

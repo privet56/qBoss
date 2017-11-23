@@ -12,10 +12,15 @@ logger::logger(cfg* pCfg, LogWnd* pTeLog, QObject *parent) : QObject(parent), m_
 {
     qRegisterMetaType<logger::LogLevel>();
 
-    this->m_pTeLog = pTeLog;
+    init(pCfg, pTeLog);
+}
 
+void logger::init(cfg* pCfg, LogWnd* pTeLog)
+{
+    this->SetLogWnd(pTeLog);
+    this->m_pCfg = pCfg;
+    if(!pCfg)return;
     bool bLog = pCfg->getValue("debug") == "1";
-
     m_sPathName = bLog ? (QApplication::applicationFilePath() + ".log") : QString::null;
 }
 
