@@ -116,3 +116,12 @@ QString f::getFC(QString sAbsFN, logger* pLog/*=nullptr*/)
     }
     return sFC;
 }
+
+bool f::exists(QString sAbsFN)
+{
+#ifdef Q_WS_WIN
+    //TODO: impl faster ...
+    //return _access()
+#endif
+    return QFile::exists(sAbsFN);
+}

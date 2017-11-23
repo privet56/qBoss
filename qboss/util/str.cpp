@@ -72,3 +72,8 @@ QString str::intWithThousandSeps(int i)
     static QLocale l;  //this would return the number with ',' : QLocale l(QLocale::English, QLocale::UnitedStates);
     return l.toString((float)i, 'f', 0);
 }
+QString str::getDir(QString sAbsFN)
+{
+    QFileInfo info = QFileInfo(sAbsFN);
+    return info.path();
+}

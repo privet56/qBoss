@@ -11,6 +11,8 @@ TabSettings::TabSettings(QWidget *parent) :
     m_pLogger(nullptr)
 {
     ui->setupUi(this);
+    this->ui->stopB->setEnabled(false);
+    this->ui->restartB->setEnabled(false);
     QObjectList children = this->children();
     activateAnis(children);
     this->installEventFilter(this);
@@ -127,24 +129,27 @@ TabSettings::~TabSettings()
 
 void TabSettings::on_startB_clicked()
 {
-
+    m_appServerSettings.start();
 }
 
 void TabSettings::on_stopB_clicked()
 {
-
+    m_appServerSettings.stop();
 }
 
 void TabSettings::on_restartB_clicked()
 {
-
+    m_appServerSettings.restart();
 }
 
 void TabSettings::on_jbossstartscript_edit_textChanged(const QString &sAppServerStartScript)
 {
-    //TODO: set icon & buttons
     bool bAppServerStartScriptIsValid = m_appServerSettings.setAppServerStartScript(sAppServerStartScript);
     this->ui->jbossstartscript_ok_label->setAniState(bAppServerStartScriptIsValid ? anioklabel::OK : anioklabel::NOK);
+    this->ui->jbosstempcleanup_area->setEnabled(bAppServerStartScriptIsValid);
+    this->ui->jbossdeploywar_area->setEnabled(bAppServerStartScriptIsValid);
+    this->ui->jbossconfigfiles_area->setEnabled(bAppServerStartScriptIsValid);
+    this->ui->startB->setEnabled(bAppServerStartScriptIsValid);
 }
 
 void TabSettings::on_jbossstartscript_browse_clicked()

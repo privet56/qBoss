@@ -15,6 +15,8 @@ class f : public QObject
 public:
     explicit f(QObject *parent = 0);
 
+    static bool exists(QString sAbsFN);
+
     static bool emptydir(QString sDir, logger* pLog);
     static QString fileSizeAsString(qint64 size);
 

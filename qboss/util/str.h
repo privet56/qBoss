@@ -19,6 +19,7 @@ public:
     static QString normalizePath(QString sPath, bool bLowerCase);
     static bool isempty(QString s, bool bTrim=true);
     static QString intWithThousandSeps(int i);
+    static QString getDir(QString sAbsFN);
 
 signals:
 

@@ -1,8 +1,11 @@
-QWidget#jbossstartscript, QWidget#jbosstempcleanup, QWidget#jbossdeploywar
+QWidget#jbossstartscript_area,
+QWidget#jbosstempcleanup_area,
+QWidget#jbossdeploywar_area,
+QWidget#jbossconfigfiles_area
 {
-	border-style:outset;
-	border-width:2px;
-	border-color: beige;
+    border-style:outset;
+    border-width:2px;
+    border-color: beige;
 }
 /*
 QPushButton

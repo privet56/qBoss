@@ -42,7 +42,7 @@
     <number>1</number>
    </property>
    <item row="0" column="0">
-    <widget class="QWidget" name="jbossstartscript" native="true">
+    <widget class="QWidget" name="jbossstartscript_area" native="true">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -229,7 +229,7 @@
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QWidget" name="jbossstartstoparea" native="true">
+    <widget class="QWidget" name="jbossstartstop_area" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
        <horstretch>0</horstretch>
@@ -241,42 +241,69 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="startB">
+       <widget class="QWidget" name="widget_4" native="true">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text">
-         <string>Start App Server</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="stopB">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Stop</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="restartB">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Restart</string>
-        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <property name="spacing">
+          <number>1</number>
+         </property>
+         <property name="leftMargin">
+          <number>1</number>
+         </property>
+         <property name="topMargin">
+          <number>1</number>
+         </property>
+         <property name="rightMargin">
+          <number>1</number>
+         </property>
+         <property name="bottomMargin">
+          <number>25</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="startB">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Start App Server</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="stopB">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="restartB">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Restart</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -343,7 +370,7 @@
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QWidget" name="jbosstempcleanup" native="true">
+    <widget class="QWidget" name="jbosstempcleanup_area" native="true">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -497,7 +524,7 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QWidget" name="jbossconfigfiles" native="true">
+    <widget class="QWidget" name="jbossconfigfiles_area" native="true">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -710,7 +737,7 @@
     </widget>
    </item>
    <item row="2" column="0">
-    <widget class="QWidget" name="jbossdeploywar" native="true">
+    <widget class="QWidget" name="jbossdeploywar_area" native="true">
      <property name="enabled">
       <bool>false</bool>
      </property>
