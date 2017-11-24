@@ -973,7 +973,7 @@
   <customwidget>
    <class>anioklabel</class>
    <extends>QLabel</extends>
-   <header>anioklabel.h</header>
+   <header>controls/anioklabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -38,8 +38,8 @@ SOURCES += \
     util/tray.cpp \
     util/w.cpp \
     util/anilabel.cpp \
-    anioklabel.cpp \
-    appservercontroller.cpp
+    controls/anioklabel.cpp \
+    controllers/appservercontroller.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -57,8 +57,8 @@ HEADERS += \
     util/tray.h \
     util/w.h \
     util/anilabel.h \
-    anioklabel.h \
-    appservercontroller.h
+    controls/anioklabel.h \
+    controllers/appservercontroller.h
 
 HEADERS  += resource.h
 

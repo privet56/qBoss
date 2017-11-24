@@ -1,4 +1,5 @@
 #include "anilabel.h"
+#include "util/f.h"
 
 anilabel::anilabel(QWidget *parent) : QLabel(parent), m_pMovie(nullptr)
 {
@@ -8,6 +9,8 @@ anilabel::anilabel(QWidget *parent) : QLabel(parent), m_pMovie(nullptr)
 bool anilabel::setani(QString sRes)
 {
     cleanup();
+
+    sRes = f::getResFn(sRes);
 
     m_pMovie = new QMovie(sRes);
     connect(m_pMovie,SIGNAL(frameChanged(int)),this,SLOT(setLabelIcon(int)));

@@ -4,6 +4,7 @@
 #include <QChar>
 #include <QFileInfo>
 #include <QStringList>
+#include <QApplication>
 
 f::f(QObject *parent) : QObject(parent)
 {
@@ -124,4 +125,19 @@ bool f::exists(QString sAbsFN)
     //return _access()
 #endif
     return QFile::exists(sAbsFN);
+}
+
+QString f::getResFn(QString sRelFN)
+{
+    static QString sAppPath = QApplication::applicationDirPath();
+
+    //TODO: cache!
+    //TODO: replace placeholder(as in cfg)
+
+    if(f::exists(str::makeAbsFN(sAppPath, sRelFN)))
+        return   str::makeAbsFN(sAppPath, sRelFN);
+
+    if(!sRelFN.startsWith('/'))
+        return ":/"+sRelFN;
+    return ":"+sRelFN;
 }

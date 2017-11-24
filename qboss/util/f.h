@@ -23,6 +23,8 @@ public:
     static void emptydir(QString sDir, QString sPattern, bool bRecursive, int& iDeleteds, int& iDeletionFaileds);
     static QString getFC(QString sAbsFN, logger* pLog = nullptr);
 
+    static QString getResFn(QString sRelFN);
+
 signals:
 
 public slots:

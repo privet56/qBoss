@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QWebEngineView>
 #include <QMessageBox>
+#include "util/str.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

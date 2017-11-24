@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "util/cfg.h"
 #include "util/logger.h"
-#include "appservercontroller.h"
+#include "controllers/appservercontroller.h"
 
 namespace Ui {
 class TabSettings;
@@ -36,6 +36,9 @@ private slots:
 
     void on_jbossstartscript_edit_textChanged(const QString &arg1);
     void on_jbossstartscript_browse_clicked();
+
+    void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
+    void onProcessStarted();
 
 private:
     Ui::TabSettings *ui;

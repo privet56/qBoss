@@ -3,6 +3,7 @@
 #include "util/str.h"
 #include "util/w.h"
 #include <QMessageBox>
+#include <QRadioButton>
 
 TabSettings::TabSettings(QWidget *parent) :
     QWidget(parent),
@@ -16,11 +17,35 @@ TabSettings::TabSettings(QWidget *parent) :
     QObjectList children = this->children();
     activateAnis(children);
     this->installEventFilter(this);
+    connect(&this->m_appServerSettings,SIGNAL(processFinished(int,QProcess::ExitStatus)), this, SLOT(onProcessFinished(int,QProcess::ExitStatus)));
+    connect(&this->m_appServerSettings,SIGNAL(processStarted()), this, SLOT(onProcessStarted()));
+}
+
+void TabSettings::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
+{
+    //Q_UNUSED(exitCode);
+    //Q_UNUSED(exitStatus);
+    bool bSettingsOK = this->m_appServerSettings.isOK();
+    this->ui->startB->setEnabled(bSettingsOK);
+    this->ui->stopB->setEnabled(false);
+    this->ui->restartB->setEnabled(false);
+    this->m_pLogger->log("Process finished exitCode:"+QString::number(exitCode)+" exitStatus:"+QString(exitStatus), exitCode == 0 ? logger::LogLevel::INF : logger::LogLevel::ERR);
+    this->ui->appServerStatusLabel->setani("res/bunny_sleep.gif");
+}
+
+void TabSettings::onProcessStarted()
+{
+    this->ui->startB->setEnabled(false);
+    this->ui->stopB->setEnabled(true);
+    this->ui->restartB->setEnabled(this->m_appServerSettings.isOK());
+    this->m_pLogger->inf("Process started.");
+    this->ui->appServerStatusLabel->setani("res/bunny_run.gif");
 }
 
 void TabSettings::init(logger* pLogger)
 {
     this->m_pLogger = pLogger;
+    m_appServerSettings.init(pLogger);
     {
         QObjectList children = this->children();
         onCfg(children, 0, true);
@@ -54,13 +79,12 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
     {
         this->m_pLogger->err("in onDeactivate");
         return;
-    }
+    }//m_pLogger->inf("onCfg recDepth:"+QString::number(recDepth)+" children:"+QString::number(children.length()));
     if(recDepth > 13)
     {
         this->m_pLogger->err("onDeactivate 13!");
         return;
     }
-    //m_pLogger->inf("onCfg recDepth:"+QString::number(recDepth)+" children:"+QString::number(children.length()));
     for(int i=0;i<children.length();i++)
     {
         QObject* pChild = children.at(i);
@@ -98,6 +122,11 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
                 }
                 else
                     this->m_pLogger->GetCfg()->setValue(pChild->objectName(), QString::number(dynamic_cast<QListWidget*>(pChild)->currentRow()));
+            }
+            else if(dynamic_cast<QRadioButton*>(pChild) ||
+                    dynamic_cast<QTextEdit*>(pChild))   //and time,date,spin,slider,scrollbar,combo...
+            {
+                this->m_pLogger->err("save/load for this item is not implemented ("+pChild->objectName()+")");
             }
         }
         QObjectList childChildren = pChild->children();
@@ -144,12 +173,12 @@ void TabSettings::on_restartB_clicked()
 
 void TabSettings::on_jbossstartscript_edit_textChanged(const QString &sAppServerStartScript)
 {
-    bool bAppServerStartScriptIsValid = m_appServerSettings.setAppServerStartScript(sAppServerStartScript);
-    this->ui->jbossstartscript_ok_label->setAniState(bAppServerStartScriptIsValid ? anioklabel::OK : anioklabel::NOK);
-    this->ui->jbosstempcleanup_area->setEnabled(bAppServerStartScriptIsValid);
-    this->ui->jbossdeploywar_area->setEnabled(bAppServerStartScriptIsValid);
-    this->ui->jbossconfigfiles_area->setEnabled(bAppServerStartScriptIsValid);
-    this->ui->startB->setEnabled(bAppServerStartScriptIsValid);
+    bool bSettingsOK = m_appServerSettings.setAppServerStartScript(sAppServerStartScript);
+    this->ui->jbossstartscript_ok_label->setAniState(bSettingsOK ? anioklabel::OK : anioklabel::NOK);
+    this->ui->jbosstempcleanup_area->setEnabled(bSettingsOK);
+    this->ui->jbossdeploywar_area->setEnabled(bSettingsOK);
+    this->ui->jbossconfigfiles_area->setEnabled(bSettingsOK);
+    this->ui->startB->setEnabled(bSettingsOK && !this->m_appServerSettings.running());
 }
 
 void TabSettings::on_jbossstartscript_browse_clicked()
