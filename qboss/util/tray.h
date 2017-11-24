@@ -5,6 +5,7 @@
 #include <QAction>
 #include <QMovie>
 #include <QSystemTrayIcon>
+#include <QSplashScreen>
 
 class QBalloonTip;
 
@@ -13,8 +14,8 @@ class tray : public QSystemTrayIcon
     Q_OBJECT
 
 public:
-    explicit tray(QObject *parent);
-    explicit tray(const QIcon &icon, QObject *parent);
+    explicit tray(QObject *parent, QSplashScreen* pSplash);
+    explicit tray(const QIcon &icon, QObject *parent, QSplashScreen* pSplash);
     void setup();
 
     static tray* getTrayIcon();
@@ -22,6 +23,7 @@ public:
 protected:
     QMovie m_movie;
     QAction* m_paHideorShow;
+    QSplashScreen* m_pSplash;
 
 signals:
 

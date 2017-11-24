@@ -39,7 +39,11 @@ SOURCES += \
     util/w.cpp \
     util/anilabel.cpp \
     controls/anioklabel.cpp \
-    controllers/appservercontroller.cpp
+    controllers/appservercontroller.cpp \
+    controllers/appservercontrollerbase.cpp \
+    controllers/appservertempdircontroller.cpp \
+    controllers/appserverdeploycontroller.cpp \
+    controllers/appserverconfigcontroller.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -58,7 +62,11 @@ HEADERS += \
     util/w.h \
     util/anilabel.h \
     controls/anioklabel.h \
-    controllers/appservercontroller.h
+    controllers/appservercontroller.h \
+    controllers/appservercontrollerbase.h \
+    controllers/appservertempdircontroller.h \
+    controllers/appserverdeploycontroller.h \
+    controllers/appserverconfigcontroller.h
 
 HEADERS  += resource.h
 

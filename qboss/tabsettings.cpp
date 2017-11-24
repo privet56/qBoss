@@ -143,7 +143,7 @@ void TabSettings::activateAnis(QObjectList& children)
             anilabel* pAniLabel = dynamic_cast<anilabel*>(pChild);
             if( pAniLabel && !str::isempty(pAniLabel->toolTip()))
             {
-                pAniLabel->setani(":/res/"+pAniLabel->toolTip()+".gif");
+                pAniLabel->setani("res/"+pAniLabel->toolTip()+".gif");
             }
         }
         QObjectList childChildren = pChild->children();

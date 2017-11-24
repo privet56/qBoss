@@ -4,18 +4,19 @@
 #include <QMainWindow>
 #include <QApplication>
 #include <QMessageBox>
+#include "f.h"
 
 static tray* __trayIcon = 0;
 
-tray::tray(QObject *parent) : QSystemTrayIcon(parent), m_paHideorShow(nullptr)
+tray::tray(QObject *parent, QSplashScreen* pSplash) : QSystemTrayIcon(parent), m_paHideorShow(nullptr), m_pSplash(pSplash)
 {
     __trayIcon = this;
 }
 
-tray::tray(const QIcon &icon, QObject *parent) : QSystemTrayIcon(icon, parent)
+tray::tray(const QIcon &icon, QObject *parent, QSplashScreen* pSplash) : QSystemTrayIcon(icon, parent), m_pSplash(pSplash)
 {
     __trayIcon = this;
-    m_movie.setFileName(":/res/bunny_hopps.gif");
+    m_movie.setFileName(f::getResFn("res/bunny_run.gif"));
     connect(&m_movie, SIGNAL(updated(const QRect&)),this,SLOT(onIconUpdate()));
     m_movie.start();
 
@@ -24,29 +25,29 @@ tray::tray(const QIcon &icon, QObject *parent) : QSystemTrayIcon(icon, parent)
 
 void tray::setup()
 {
-    this->setToolTip("qDesktopSearch");
+    this->setToolTip("qBoss");
     this->show();
 
     QWidget* parentWnd = (QWidget*)parent();
     QMenu* menu = new QMenu(parentWnd);
 
     {
-        QAction* quitAction = new QAction(QIcon(":/res/exit.png"), "Quit", this);
+        QAction* quitAction = new QAction(QIcon(f::getResFn("res/exit.png")), "Quit", this);
         connect(quitAction,SIGNAL(triggered()), this->parent()/*the main window*/, SLOT(close()));
         menu->addAction(quitAction);
     }
     {
-        QAction* mascotAction = new QAction(QIcon(":/res/bun.png"), "Show Mascot...", this);
+        QAction* mascotAction = new QAction(QIcon(f::getResFn("res/bun.png")), "Show Mascot...", this);
         connect(mascotAction,SIGNAL(triggered()), this, SLOT(on_actionShow_Mascot()));
         menu->addAction(mascotAction);
     }
     {
-        QAction* aboutAction = new QAction(QIcon(":/res/qbun.png"), "About...", this);
+        QAction* aboutAction = new QAction(QIcon(f::getResFn("res/qbun.png")), "About...", this);
         connect(aboutAction,SIGNAL(triggered()), this, SLOT(onAbout()));
         menu->addAction(aboutAction);
     }
     {
-        m_paHideorShow = new QAction(QIcon(":/res/expander_ic_minimized.9.png"), "Minimize to Tray", this);
+        m_paHideorShow = new QAction(QIcon(f::getResFn("res/expander_ic_minimized.9.png")), "Minimize to Tray", this);
         m_paHideorShow->setEnabled(true);
         connect(m_paHideorShow,SIGNAL(triggered()),this,SLOT(hide_show()));
         menu->addAction(m_paHideorShow);
@@ -60,7 +61,7 @@ void tray::hide_show()
     bool isVisible = !parentWnd->isVisible();
     parentWnd->setVisible(isVisible);
 
-    m_paHideorShow->setIcon(isVisible ? QIcon(":/res/expander_ic_minimized.9.png") : QIcon(":/res/expander_ic_maximized.9.png"));
+    m_paHideorShow->setIcon(isVisible ? QIcon(f::getResFn("res/expander_ic_minimized.9.png")) : QIcon(f::getResFn("res/expander_ic_maximized.9.png")));
     m_paHideorShow->setText(isVisible ? "Minimize to Tray" : "Restore Main Window");
 
     if(!isVisible)
@@ -71,7 +72,7 @@ void tray::hide_show()
 void tray::onAbout()
 {
     showIfHidden();
-    QMessageBox::aboutQt((QWidget*)parent(), "qDesktopSearch");
+    QMessageBox::aboutQt((QWidget*)parent(), "qBoss");
 }
 void tray::showIfHidden()
 {
@@ -112,12 +113,6 @@ tray* tray::getTrayIcon()
 void tray::on_actionShow_Mascot()
 {
     showIfHidden();
-
-    QWidget* parentWnd = (QWidget*)parent();
-    if(parentWnd)
-    {
-        MainWindow* pMainWnd = (MainWindow*)parentWnd; //TODO: q_cast
-        //TODO: impl!
-        //pMainWnd->on_actionShow_Mascot_triggered();
-    }
+    if(m_pSplash)this->m_pSplash->showMessage(" ");
+    if(m_pSplash)this->m_pSplash->show();
 }
