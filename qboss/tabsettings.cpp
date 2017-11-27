@@ -4,6 +4,7 @@
 #include "util/w.h"
 #include <QMessageBox>
 #include <QRadioButton>
+#include "views/configview.h"
 
 TabSettings::TabSettings(QWidget *parent) :
     QWidget(parent),
@@ -49,6 +50,7 @@ void TabSettings::init(logger* pLogger)
     {
         QObjectList children = this->children();
         onCfg(children, 0, true);
+        //m_pLogger->inf("onCfg found subviews:"+QString::number(this->m_appServerSettings.getSubControllers()->size()));
     }
 }
 bool TabSettings::eventFilter(QObject* obj, QEvent* event)
@@ -90,7 +92,12 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
         QObject* pChild = children.at(i);
         if(dynamic_cast<QWidget*>(pChild))
         {
-            if(dynamic_cast<QLineEdit*>(pChild))
+            if(dynamic_cast<ConfigView*>(pChild) && bRead)
+            {
+                ConfigView* configView = (ConfigView*)pChild;
+                this->m_appServerSettings.addSubController(configView->getController(this->m_appServerSettings.getSubControllers(), this->m_pLogger, this->ui, &this->m_appServerSettings));
+            }
+            else if(dynamic_cast<QLineEdit*>(pChild))
             {
                 if(bRead)
                 {

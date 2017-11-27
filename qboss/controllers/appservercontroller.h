@@ -5,6 +5,7 @@
 #include <QProcess>
 #include "util/cfg.h"
 #include "util/logger.h"
+#include "appservercontrollers.h"
 
 class AppServerController : public QObject
 {
@@ -19,8 +20,12 @@ public:
     bool start();
     bool stop(int exitCode=0, QProcess::ExitStatus exitStatus=QProcess::NormalExit);
     bool restart();
+    void addSubController(AppServerControllerBase* appServerControllerBase);
+    AppServerControllers* getSubControllers();
+    QString GetAppServerStartScript();
 
 protected:
+    AppServerControllers m_appServerControllers;
     QString m_sAppServerStartScript;
     QProcess* m_pProcess;
     logger* m_pLogger;

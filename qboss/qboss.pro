@@ -43,7 +43,12 @@ SOURCES += \
     controllers/appservercontrollerbase.cpp \
     controllers/appservertempdircontroller.cpp \
     controllers/appserverdeploycontroller.cpp \
-    controllers/appserverconfigcontroller.cpp
+    controllers/appserverconfigcontroller.cpp \
+    controllers/appservercontrollers.cpp \
+    views/configview.cpp \
+    views/configviewappserverconfig.cpp \
+    views/configviewdeployview.cpp \
+    views/configviewtempdirview.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,7 +71,12 @@ HEADERS += \
     controllers/appservercontrollerbase.h \
     controllers/appservertempdircontroller.h \
     controllers/appserverdeploycontroller.h \
-    controllers/appserverconfigcontroller.h
+    controllers/appserverconfigcontroller.h \
+    controllers/appservercontrollers.h \
+    views/configview.h \
+    views/configviewappserverconfig.h \
+    views/configviewdeployview.h \
+    views/configviewtempdirview.h
 
 HEADERS  += resource.h
 

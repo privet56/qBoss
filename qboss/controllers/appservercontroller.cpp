@@ -2,13 +2,26 @@
 #include "util/f.h"
 #include "util/str.h"
 
-AppServerController::AppServerController(QObject *parent) : QObject(parent), m_pProcess(nullptr), m_pLogger(nullptr)
+AppServerController::AppServerController(QObject *parent) : QObject(parent), m_pProcess(nullptr), m_pLogger(nullptr), m_appServerControllers(this)
 {
 
 }
 void AppServerController::init(logger* pLogger)
 {
     this->m_pLogger = pLogger;
+    this->m_appServerControllers.init(pLogger);
+}
+AppServerControllers* AppServerController::getSubControllers()
+{
+    return &this->m_appServerControllers;
+}
+QString AppServerController::GetAppServerStartScript()
+{
+    return this->m_sAppServerStartScript;
+}
+void AppServerController::addSubController(AppServerControllerBase* appServerControllerBase)
+{
+    this->m_appServerControllers.add(appServerControllerBase);
 }
 bool AppServerController::setAppServerStartScript(QString sAppServerStartScript)
 {

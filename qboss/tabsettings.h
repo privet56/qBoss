@@ -2,6 +2,7 @@
 #define TABSETTINGS_H
 
 #include <QWidget>
+#include <QListWidgetItem>
 #include "util/cfg.h"
 #include "util/logger.h"
 #include "controllers/appservercontroller.h"
