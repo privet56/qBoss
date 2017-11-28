@@ -38,8 +38,10 @@ void ConfigViewDeployView::setok()
     if(!this->m_pAppServerDeployController->active())
     {
         this->ui->jbossdeploywar_ok_label->setAniState(anioklabel::OkState::INACTIVE);
-        return;
     }
-
-    this->ui->jbossdeploywar_ok_label->setAniState(this->m_pAppServerDeployController->ok() ? anioklabel::OkState::OK : anioklabel::OkState::NOK);
+    else
+    {
+        this->ui->jbossdeploywar_ok_label->setAniState(this->m_pAppServerDeployController->ok() ? anioklabel::OkState::OK : anioklabel::OkState::NOK);
+    }
+    emit onStateChanged();
 }

@@ -27,8 +27,10 @@ void ConfigViewTempDirView::setok()
     if(!this->m_pAppServerTempDirController->active())
     {
         this->ui->jbosstempcleanup_ok_label->setAniState(anioklabel::OkState::INACTIVE);
-        return;
     }
-
-    this->ui->jbosstempcleanup_ok_label->setAniState(this->m_pAppServerTempDirController->ok() ? anioklabel::OkState::OK : anioklabel::OkState::NOK);
+    else
+    {
+        this->ui->jbosstempcleanup_ok_label->setAniState(this->m_pAppServerTempDirController->ok() ? anioklabel::OkState::OK : anioklabel::OkState::NOK);
+    }
+    emit onStateChanged();
 }

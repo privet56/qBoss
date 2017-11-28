@@ -15,7 +15,8 @@ public:
     virtual AppServerControllerBase* getController(AppServerControllers* appServerControllers, logger* pLogger, Ui::TabSettings *ui, AppServerController* pAppServerController);
 protected:
     AppServerConfigController* m_pAppServerConfigController;
-    void setok();
+    virtual void setok();
+
 private slots:
     void on_jbossconfigfiles_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
     void on_jbossconfigfiles_chk_toggled(bool checked);

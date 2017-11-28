@@ -9,6 +9,12 @@
 #include <QPixmap>
 #include <QFileDialog>
 
+#if defined(WIN32)
+#include <windows.h>
+#include <tlhelp32.h>
+#include <tchar.h>
+#endif
+
 w::w(QWidget *parent) : QWidget(parent)
 {
 
@@ -26,4 +32,50 @@ QString w::getOpenFileName(QWidget* parent, QString sTitle, QString sPattern)
     }
 
     return sAbsFN;
+}
+void w::killSubProcesses(qint64 pid, logger* pLogger)
+{
+    // Take a snapshot of all processes in the system.
+    //hProcessSnap = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
+    // Take a snapshot of all modules in the specified process.
+    //hModuleSnap = CreateToolhelp32Snapshot( TH32CS_SNAPMODULE, dwPID );
+    // Take a snapshot of all running threads
+    //hThreadSnap = CreateToolhelp32Snapshot( TH32CS_SNAPTHREAD, 0 );
+
+    HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+
+    if(hProcessSnap != INVALID_HANDLE_VALUE)
+    {
+        PROCESSENTRY32	processEntry32 ;
+        processEntry32.dwSize = sizeof(PROCESSENTRY32);
+        if(Process32First(hProcessSnap, &processEntry32))
+        {
+            do
+            {
+                if (pid == processEntry32.th32ParentProcessID)
+                {
+                    //qDebug() << QString::fromWCharArray(processEntry32.szExeFile);
+
+                    w::killSubProcesses(processEntry32.th32ProcessID, pLogger);  //recurse
+
+                    HANDLE hChildProc = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, processEntry32.th32ProcessID);
+                   if (hChildProc)
+                   {
+                       ::TerminateProcess(hChildProc, 1);
+                       ::CloseHandle(hChildProc);
+                   }
+                   else
+                   {
+                       if(pLogger)pLogger->err("process couldn't be closed:"+QString::fromWCharArray(processEntry32.szExeFile));
+                   }
+                }
+            }
+            while(Process32Next(hProcessSnap, &processEntry32)) ;
+        }
+        CloseHandle(hProcessSnap);
+    }
+    else
+    {
+        if(pLogger)pLogger->err("could not list child processes to be closed");
+    }
 }

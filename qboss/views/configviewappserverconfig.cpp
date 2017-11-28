@@ -40,4 +40,5 @@ void ConfigViewAppServerConfig::setok()
     {
         this->ui->jbossconfigfiles_ok_label->setAniState(this->m_pAppServerConfigController->ok() ? anioklabel::OkState::OK : anioklabel::OkState::NOK);
     }
+    emit onStateChanged();
 }

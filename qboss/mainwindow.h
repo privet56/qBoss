@@ -23,7 +23,7 @@ protected:
     cfg m_cfg;
 
 protected:
-    //void closeEvent( QCloseEvent *evt );
+    void closeEvent(QCloseEvent *evt);
 
 private:
     Ui::MainWindow *ui;

@@ -11,8 +11,7 @@ public:
     AppServerTempDirController(QObject *parent = nullptr);
 public:
     virtual bool ok();
-    QString GetTempDir();
-    QString GetLogDir();
+    QList<QString> GetTempDirs();
     virtual bool action();
 };
 

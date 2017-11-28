@@ -26,11 +26,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*void MainWindow::closeEvent( QCloseEvent *evt )
+void MainWindow::closeEvent(QCloseEvent *evt)
 {
-    Q_UNUSED( evt );
+    Q_UNUSED(evt);
+
+    this->ui->settingsWidget->closeEvent(evt);
+
     //QMessageBox::warning( NULL, "mainwindow","close", QMessageBox::Ok);
-  //foreach (QWidget *widget, QApplication::topLevelWidgets()) {
-    //widget->close();
-   //}
-}*/
+    //foreach (QWidget *widget, QApplication::topLevelWidgets()) {
+        //widget->close();
+    //}
+}

@@ -17,9 +17,19 @@ TabSettings::TabSettings(QWidget *parent) :
     this->ui->restartB->setEnabled(false);
     QObjectList children = this->children();
     activateAnis(children);
-    this->installEventFilter(this);
+    //this->installEventFilter(this);
     connect(&this->m_appServerSettings,SIGNAL(processFinished(int,QProcess::ExitStatus)), this, SLOT(onProcessFinished(int,QProcess::ExitStatus)));
     connect(&this->m_appServerSettings,SIGNAL(processStarted()), this, SLOT(onProcessStarted()));
+}
+void TabSettings::closeEvent(QCloseEvent *evt)
+{
+    Q_UNUSED(evt);
+
+    QObjectList children = this->children();
+    onCfg(children, 0, false);
+
+    if( this->m_appServerSettings.running())
+        this->m_appServerSettings.stop();
 }
 
 void TabSettings::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
@@ -50,20 +60,21 @@ void TabSettings::init(logger* pLogger)
     {
         QObjectList children = this->children();
         onCfg(children, 0, true);
+        this->onOverallConfigChanged();
         //m_pLogger->inf("onCfg found subviews:"+QString::number(this->m_appServerSettings.getSubControllers()->size()));
     }
 }
-bool TabSettings::eventFilter(QObject* obj, QEvent* event)
+/*bool TabSettings::eventFilter(QObject* obj, QEvent* event)
 {
     //events when closing the app:
         //25: QEvent::WindowDeactivate      //occurs when closing the main app
         //18: QEvent::Hide                  //occurs also when changing the tabs...
 
-    //if(this->m_pLogger &&   (event->type() != QEvent::Paint/*12*/) &&
-    //                        (event->type() != QEvent::LayoutRequest/*76*/) &&
-    //                        (event->type() != QEvent::Leave/*11*/) &&
-    //                        (event->type() != QEvent::Move/*13*/) &&
-    //                        (event->type() != QEvent::Resize/*14*/)
+    //if(this->m_pLogger &&   (event->type() != QEvent::Paint/*12* /) &&
+    //                        (event->type() != QEvent::LayoutRequest/*76* /) &&
+    //                        (event->type() != QEvent::Leave/*11* /) &&
+    //                        (event->type() != QEvent::Move/*13* /) &&
+    //                        (event->type() != QEvent::Resize/*14* /)
     //   )
     //{
     //    m_pLogger->inf("event:"+QString::number(event->type()));
@@ -74,7 +85,7 @@ bool TabSettings::eventFilter(QObject* obj, QEvent* event)
         onCfg(children, 0, false);
     }
     return QWidget::eventFilter(obj,event);
-}
+}*/
 void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
 {
     if(!this->m_pLogger || !this->m_pLogger->GetCfg())
@@ -96,12 +107,13 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
             {
                 ConfigView* configView = (ConfigView*)pChild;
                 this->m_appServerSettings.addSubController(configView->getController(this->m_appServerSettings.getSubControllers(), this->m_pLogger, this->ui, &this->m_appServerSettings));
+                connect(configView, SIGNAL(onStateChanged()), this, SLOT(onOverallConfigChanged()));
             }
             else if(dynamic_cast<QLineEdit*>(pChild))
             {
                 if(bRead)
                 {
-                    connect(pChild, SIGNAL(textChanged(const QString &)), this, SLOT(onOverallConfigChanged()));
+                    //connect(pChild, SIGNAL(textChanged(const QString &)), this, SLOT(onOverallConfigChanged()));
                     QString s(this->m_pLogger->GetCfg()->getValue(pChild->objectName()));
                     if(!str::isempty(s, false))
                         dynamic_cast<QLineEdit*>(pChild)->setText(s);
@@ -113,7 +125,7 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
             {
                 if(bRead)
                 {
-                    connect(pChild, SIGNAL(toggled(bool)), this, SLOT(onOverallConfigChanged()));
+                    //connect(pChild, SIGNAL(toggled(bool)), this, SLOT(onOverallConfigChanged()));
                     QString s(this->m_pLogger->GetCfg()->getValue(pChild->objectName()));
                     if(!str::isempty(s, true))
                         dynamic_cast<QCheckBox*>(pChild)->setChecked(s == "1");
@@ -125,7 +137,7 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
             {
                 if(bRead)
                 {
-                    connect(pChild, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(onOverallConfigChanged()));
+                    //connect(pChild, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(onOverallConfigChanged()));
                     QString s(this->m_pLogger->GetCfg()->getValue(pChild->objectName()));
                     if(!str::isempty(s, true))
                         dynamic_cast<QListWidget*>(pChild)->setCurrentRow(s.toInt());

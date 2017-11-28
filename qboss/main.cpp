@@ -10,6 +10,9 @@
 #include "util/tray.h"
 #include "util/f.h"
 
+//TODO: close main win -> stop possibly started appserver
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

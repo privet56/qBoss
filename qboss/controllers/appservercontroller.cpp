@@ -1,3 +1,4 @@
+#include <QThread>
 #include "appservercontroller.h"
 #include "util/f.h"
 #include "util/str.h"
@@ -111,14 +112,21 @@ bool AppServerController::stop(int exitCode, QProcess::ExitStatus exitStatus)
         this->m_pLogger->wrn("cannot stop (as not running)");
         return false;
     }
+    qint64 pid = this->m_pProcess->processId();
+    w::killSubProcesses(pid, this->m_pLogger);
     this->m_pProcess->disconnect();
     this->m_pProcess->terminate();
+    QThread::msleep(300);
     this->m_pProcess->close();
-    this->m_pProcess->kill();
+    QThread::msleep(300);
+    if (this->m_pProcess->state() != QProcess::NotRunning)
+    {
+        this->m_pProcess->kill();
+        QThread::msleep(300);
+    }
     this->m_pProcess->deleteLater();
     delete this->m_pProcess;
     this->m_pProcess = nullptr;
-
     //this->m_pLogger->wrn("stop: process finished: "+QString::number(exitCode)+" exitStatus:"+QString::number(exitStatus));
     emit processFinished(exitCode, exitStatus);
     return true;

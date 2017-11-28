@@ -12,8 +12,14 @@ void ConfigView::init(logger* pLogger)
 }
 AppServerControllerBase* ConfigView::getController(AppServerControllers* appServerControllers, logger* pLogger, Ui::TabSettings *ui, AppServerController* pAppServerController)
 {
+    Q_UNUSED(appServerControllers)
+
     this->init(pLogger);
     this->ui = ui;
     this->m_pAppServerController = pAppServerController;
     return nullptr;
+}
+void ConfigView::setok()
+{
+    emit onStateChanged();
 }

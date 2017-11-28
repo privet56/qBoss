@@ -2,6 +2,7 @@
 #define W_H
 
 #include <QWidget>
+#include "logger.h"
 
 class w : public QWidget
 {
@@ -9,6 +10,7 @@ class w : public QWidget
 public:
     explicit w(QWidget *parent = 0);
     static QString getOpenFileName(QWidget* parent, QString sTitle, QString sPattern);
+    static void killSubProcesses(qint64 pid, logger* pLogger);
 
 signals:
 

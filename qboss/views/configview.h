@@ -26,8 +26,10 @@ protected:
     logger* m_pLogger;
     Ui::TabSettings *ui;
     AppServerController* m_pAppServerController;
+    virtual void setok();
 
 signals:
+    void onStateChanged();
 
 public slots:
 };

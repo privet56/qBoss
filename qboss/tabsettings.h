@@ -23,9 +23,10 @@ public:
     void init(logger* pLogger);
     logger* m_pLogger;
     void activateAnis(QObjectList& children);
+    void closeEvent(QCloseEvent *evt);
 
 protected:
-    bool eventFilter(QObject * obj, QEvent * event);
+    //bool eventFilter(QObject * obj, QEvent * event);
     void onCfg(QObjectList& children, int recDepth, bool bRead);
     AppServerController m_appServerSettings;
 
