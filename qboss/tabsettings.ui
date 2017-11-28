@@ -512,7 +512,7 @@
           <item>
            <widget class="QCheckBox" name="clearappservertempdirs_chk">
             <property name="text">
-             <string>Clear App Server Temp Directories</string>
+             <string>Clear App Server Temp &amp;&amp; Log Directories</string>
             </property>
            </widget>
           </item>

@@ -12,7 +12,7 @@ public:
 public:
     void setActiveConfigFileIndex(int iConfigFile2Set);
     virtual bool ok();
-
+    virtual bool action();
 protected:
     int m_iConfigFile2Set;
 

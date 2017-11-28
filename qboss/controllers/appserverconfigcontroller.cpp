@@ -10,9 +10,15 @@ void AppServerConfigController::setActiveConfigFileIndex(int iConfigFile2Set)
 }
 bool AppServerConfigController::ok()
 {
-    if(!this->m_bAktive)
-        return false;
+    if(!this->active())
+        return true;
     if(this->m_iConfigFile2Set < 0)
         return false;
+    return true;
+}
+bool AppServerConfigController::action()
+{
+    if(!this->active())return true;
+    //TODO:
     return true;
 }

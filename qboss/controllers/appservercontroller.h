@@ -16,7 +16,7 @@ public:
     void init(logger* pLogger);
     bool setAppServerStartScript(QString sAppServerStartScript);
     bool running();
-    bool isOK();
+    bool isOK(bool bOnlyMyOK);
     bool start();
     bool stop(int exitCode=0, QProcess::ExitStatus exitStatus=QProcess::NormalExit);
     bool restart();

@@ -21,9 +21,14 @@ public:
     virtual void setActive(bool active);
     virtual bool active();
     virtual bool ok();
+    virtual bool action();
+    virtual void setok();
+
+    QString GetSubDir(QString sSubDir);
+
 protected:
     logger* m_pLogger;
-    bool m_bAktive;
+    bool m_bActive;
     AppServerController* m_pAppServerController;
 
 signals:

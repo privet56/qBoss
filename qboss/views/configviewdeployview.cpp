@@ -15,11 +15,12 @@ AppServerControllerBase* ConfigViewDeployView::getController(AppServerController
     }
     m_pAppServerDeployController = new AppServerDeployController(appServerControllers);
     m_pAppServerDeployController->init(pLogger, pAppServerController);
+    //m_pAppServerDeployController->setActive(true);
     return m_pAppServerDeployController;
 }
 void ConfigViewDeployView::on_jbossdeploywar_watch_chk_toggled(bool checked)
 {
-
+    this->m_pAppServerDeployController->setWatch(checked);
 }
 void ConfigViewDeployView::on_jbossdeploywar_browse_clicked()
 {
@@ -30,7 +31,15 @@ void ConfigViewDeployView::on_jbossdeploywar_browse_clicked()
 void ConfigViewDeployView::on_jbossdeploywar_edit_textChanged(const QString &arg1)
 {
     this->m_pAppServerDeployController->setWarAbsFN2Deploy(arg1);
+    this->setok();
+}
+void ConfigViewDeployView::setok()
+{
+    if(!this->m_pAppServerDeployController->active())
     {
-
+        this->ui->jbossdeploywar_ok_label->setAniState(anioklabel::OkState::INACTIVE);
+        return;
     }
+
+    this->ui->jbossdeploywar_ok_label->setAniState(this->m_pAppServerDeployController->ok() ? anioklabel::OkState::OK : anioklabel::OkState::NOK);
 }

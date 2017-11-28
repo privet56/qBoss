@@ -40,6 +40,7 @@ private slots:
 
     void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
     void onProcessStarted();
+    void onOverallConfigChanged();
 
 private:
     Ui::TabSettings *ui;

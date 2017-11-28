@@ -7,24 +7,58 @@ AppServerTempDirController::AppServerTempDirController(QObject *parent) : AppSer
 }
 bool AppServerTempDirController::ok()
 {
-   if(!this->m_bAktive)return false;
-   if(!this->m_pAppServerController->isOK())
-       return false;
-   QString sTempDir = this->GetTempDir();
-   if(str::isempty(sTempDir))
-       return false;
+   if(!this->active())return true;
+   //if(!this->m_pAppServerController->isOK()) return false;
+   {
+       QString sTempDir = this->GetTempDir();
+       if(str::isempty(sTempDir))
+           return false;
+   }
+   {
+       QString sLogDir = this->GetLogDir();
+       if(str::isempty(sLogDir))
+           return false;
+   }
    return true;
 }
 QString AppServerTempDirController::GetTempDir()
 {
-    QString sDir(str::getDir(this->m_pAppServerController->GetAppServerStartScript()));
-    if(f::exists(str::makeAbsFN(sDir, "temp")))
-        return str::makeAbsFN(sDir, "temp");
-    sDir = str::getDir(sDir);
-    if(f::exists(str::makeAbsFN(sDir, "temp")))
-        return str::makeAbsFN(sDir, "temp");
+    return this->GetSubDir("temp");
+}
+QString AppServerTempDirController::GetLogDir()
+{
+    return this->GetSubDir("logs");
+}
+
+bool AppServerTempDirController::action()
+{
+    if(!this->active())return true;
+    QString sAppServerTempDir = this->GetTempDir();
+    QString sAppServerLogDir  = this->GetLogDir();
     {
-        //ojje, ojje: invalid appserver path?
+        if(str::isempty(sAppServerTempDir) || !f::exists(sAppServerTempDir))
+        {
+            this->m_pLogger->err("cannot access app server temp dir '"+sAppServerTempDir+"'");
+            return false;
+        }
+        if(!f::emptydir(sAppServerTempDir, this->m_pLogger))
+        {
+            this->m_pLogger->err("cannot cleanup app server temp dir '"+sAppServerTempDir+"'");
+            return false;
+        }
     }
-    return QString::null;
+    {
+        if(str::isempty(sAppServerLogDir) || !f::exists(sAppServerLogDir))
+        {
+            this->m_pLogger->err("cannot access app server Log dir '"+sAppServerLogDir+"'");
+            return false;
+        }
+        if(!f::emptydir(sAppServerLogDir, this->m_pLogger))
+        {
+            this->m_pLogger->err("cannot cleanup app server Log dir '"+sAppServerLogDir+"'");
+            return false;
+        }
+    }
+    this->m_pLogger->inf("cleaned up '"+sAppServerLogDir+"' & '"+sAppServerTempDir+"'");
+    return true;
 }

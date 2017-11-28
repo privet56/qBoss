@@ -77,3 +77,8 @@ QString str::getDir(QString sAbsFN)
     QFileInfo info = QFileInfo(sAbsFN);
     return info.path();
 }
+QString str::getFN(QString sAbsFN)
+{
+    QFileInfo info = QFileInfo(sAbsFN);
+    return info.fileName();
+}

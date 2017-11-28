@@ -26,7 +26,7 @@ void TabSettings::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatu
 {
     //Q_UNUSED(exitCode);
     //Q_UNUSED(exitStatus);
-    bool bSettingsOK = this->m_appServerSettings.isOK();
+    bool bSettingsOK = this->m_appServerSettings.isOK(false);
     this->ui->startB->setEnabled(bSettingsOK);
     this->ui->stopB->setEnabled(false);
     this->ui->restartB->setEnabled(false);
@@ -38,7 +38,7 @@ void TabSettings::onProcessStarted()
 {
     this->ui->startB->setEnabled(false);
     this->ui->stopB->setEnabled(true);
-    this->ui->restartB->setEnabled(this->m_appServerSettings.isOK());
+    this->ui->restartB->setEnabled(this->m_appServerSettings.isOK(false));
     this->m_pLogger->inf("Process started.");
     this->ui->appServerStatusLabel->setani("res/bunny_run.gif");
 }
@@ -101,6 +101,7 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
             {
                 if(bRead)
                 {
+                    connect(pChild, SIGNAL(textChanged(const QString &)), this, SLOT(onOverallConfigChanged()));
                     QString s(this->m_pLogger->GetCfg()->getValue(pChild->objectName()));
                     if(!str::isempty(s, false))
                         dynamic_cast<QLineEdit*>(pChild)->setText(s);
@@ -112,6 +113,7 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
             {
                 if(bRead)
                 {
+                    connect(pChild, SIGNAL(toggled(bool)), this, SLOT(onOverallConfigChanged()));
                     QString s(this->m_pLogger->GetCfg()->getValue(pChild->objectName()));
                     if(!str::isempty(s, true))
                         dynamic_cast<QCheckBox*>(pChild)->setChecked(s == "1");
@@ -123,6 +125,7 @@ void TabSettings::onCfg(QObjectList& children, int recDepth, bool bRead)
             {
                 if(bRead)
                 {
+                    connect(pChild, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(onOverallConfigChanged()));
                     QString s(this->m_pLogger->GetCfg()->getValue(pChild->objectName()));
                     if(!str::isempty(s, true))
                         dynamic_cast<QListWidget*>(pChild)->setCurrentRow(s.toInt());
@@ -180,12 +183,18 @@ void TabSettings::on_restartB_clicked()
 
 void TabSettings::on_jbossstartscript_edit_textChanged(const QString &sAppServerStartScript)
 {
-    bool bSettingsOK = m_appServerSettings.setAppServerStartScript(sAppServerStartScript);
+    /*bool bSettingsOK = */m_appServerSettings.setAppServerStartScript(sAppServerStartScript);
+    onOverallConfigChanged();
+}
+void TabSettings::onOverallConfigChanged()
+{
+    bool bSettingsOK    = m_appServerSettings.isOK(true);
+    bool bAllSettingsOK = this->m_appServerSettings.isOK(false);
     this->ui->jbossstartscript_ok_label->setAniState(bSettingsOK ? anioklabel::OK : anioklabel::NOK);
     this->ui->jbosstempcleanup_area->setEnabled(bSettingsOK);
     this->ui->jbossdeploywar_area->setEnabled(bSettingsOK);
     this->ui->jbossconfigfiles_area->setEnabled(bSettingsOK);
-    this->ui->startB->setEnabled(bSettingsOK && !this->m_appServerSettings.running());
+    this->ui->startB->setEnabled(bAllSettingsOK && !this->m_appServerSettings.running());
 }
 
 void TabSettings::on_jbossstartscript_browse_clicked()

@@ -15,6 +15,8 @@ public:
     virtual AppServerControllerBase* getController(AppServerControllers* appServerControllers, logger* pLogger, Ui::TabSettings *ui, AppServerController* pAppServerController);
 protected:
     AppServerTempDirController* m_pAppServerTempDirController;
+    void setok();
+
 private slots:
     void on_clearappservertempdirs_chk_toggled(bool checked);
 

@@ -12,8 +12,11 @@ public:
     ConfigViewDeployView(QWidget *parent = nullptr);
 public:
     virtual AppServerControllerBase* getController(AppServerControllers* appServerControllers, logger* pLogger, Ui::TabSettings *ui, AppServerController* pAppServerController);
+public:
+
 protected:
     AppServerDeployController* m_pAppServerDeployController;
+    void setok();
 
 private slots:
     void on_jbossdeploywar_watch_chk_toggled(bool checked);

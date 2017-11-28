@@ -12,6 +12,8 @@ public:
 public:
     virtual bool ok();
     QString GetTempDir();
+    QString GetLogDir();
+    virtual bool action();
 };
 
 #endif // APPSERVERTEMPDIRCONTROLLER_H

@@ -32,8 +32,7 @@ void ConfigViewAppServerConfig::on_jbossconfigfiles_chk_toggled(bool checked)
 }
 void ConfigViewAppServerConfig::setok()
 {
-    if(!this->m_pAppServerController->isOK() ||
-       !this->m_pAppServerConfigController->active())
+    if(!this->m_pAppServerConfigController->active())
     {
         this->ui->jbossconfigfiles_ok_label->setAniState(anioklabel::OkState::INACTIVE);
     }

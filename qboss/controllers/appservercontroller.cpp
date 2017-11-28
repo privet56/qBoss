@@ -26,11 +26,15 @@ void AppServerController::addSubController(AppServerControllerBase* appServerCon
 bool AppServerController::setAppServerStartScript(QString sAppServerStartScript)
 {
     this->m_sAppServerStartScript = sAppServerStartScript;
-    return this->isOK();
+    this->getSubControllers()->setok();
+    return this->isOK(true);
 }
-bool AppServerController::isOK()
+bool AppServerController::isOK(bool bOnlyMyOK)
 {
-    return f::exists(this->m_sAppServerStartScript);
+    if(!f::exists(this->m_sAppServerStartScript))
+        return false;
+    if(bOnlyMyOK)return true;
+    return this->getSubControllers()->ok();
 }
 bool AppServerController::running()
 {
@@ -38,7 +42,7 @@ bool AppServerController::running()
 }
 bool AppServerController::start()
 {
-    if(!this->isOK())
+    if(!this->isOK(false))
     {
         this->m_pLogger->wrn("cannot start! fnf:'"+this->m_sAppServerStartScript+"'");
         return false;
@@ -48,6 +52,9 @@ bool AppServerController::start()
         this->m_pLogger->wrn("cannot start! already running:"+this->m_sAppServerStartScript);
         return false;
     }
+
+    this->getSubControllers()->action();
+
     this->m_pProcess = new QProcess(this);
     this->m_pProcess->setWorkingDirectory(str::getDir(this->m_sAppServerStartScript));
 
@@ -123,7 +130,7 @@ bool AppServerController::restart()
         this->m_pLogger->wrn("cannot restart (as not running)");
         return false;
     }
-    if(!this->isOK())
+    if(!this->isOK(false))
     {
         this->m_pLogger->wrn("cannot restart (as not OK)");
         return false;

@@ -15,6 +15,9 @@ public:
     void init(logger* pLogger);
     void add(AppServerControllerBase* appServerController);
     int size();
+    virtual bool ok();
+    virtual bool action();
+    virtual void setok();
 protected:
     QList<AppServerControllerBase*> m_AppServerControllers;
     logger* m_pLogger;

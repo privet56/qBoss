@@ -20,6 +20,7 @@ public:
     static bool isempty(QString s, bool bTrim=true);
     static QString intWithThousandSeps(int i);
     static QString getDir(QString sAbsFN);
+    static QString getFN(QString sAbsFN);
 
 signals:
 
