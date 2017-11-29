@@ -29,6 +29,11 @@ signals:
 public slots:
 private slots:
     void on_eUrl_returnPressed();
+
+    void browserLoadFinished(bool ok);
+    void browserLoadStarted();
+    void browserUrlChanged(const QUrl url);
+
 };
 
 #endif // TABBROWSER_H

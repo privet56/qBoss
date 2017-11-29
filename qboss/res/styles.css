@@ -7,6 +7,10 @@ QWidget#jbossconfigfiles_area
     border-width:2px;
     border-color: beige;
 }
+QLineEdit[loading=true]
+{
+  color:#f4c773;
+}
 /*
 QPushButton
 {
