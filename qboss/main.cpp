@@ -10,8 +10,8 @@
 #include "util/tray.h"
 #include "util/f.h"
 
-//TODO: close main win -> stop possibly started appserver
-
+//TODO: hold taskbar icon synchron to the appserver.running state
+//TODO: support https
 
 int main(int argc, char *argv[])
 {

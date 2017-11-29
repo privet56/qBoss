@@ -26,6 +26,7 @@ QList<QString> AppServerTempDirController::GetTempDirs()
     lsTempDirs << this->GetSubDir("temp");
     lsTempDirs << this->GetSubDir("logs");
     lsTempDirs << this->GetSubDir("work");
+    lsTempDirs << this->GetSubDir("webapps/temp");  //TODO: check dir name pattern after failed deployment!
     return lsTempDirs;
 }
 

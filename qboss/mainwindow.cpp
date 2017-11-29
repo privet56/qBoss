@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->m_logger.init(&this->m_cfg, this->ui->logWindow);
     this->ui->settingsWidget->init(&this->m_logger);
+    this->ui->browserWidget->init(&this->m_logger);
 
     QList<int> sizes;
     sizes << 1; //top area
@@ -31,6 +32,7 @@ void MainWindow::closeEvent(QCloseEvent *evt)
     Q_UNUSED(evt);
 
     this->ui->settingsWidget->closeEvent(evt);
+    this->ui->browserWidget->closeEvent(evt);
 
     //QMessageBox::warning( NULL, "mainwindow","close", QMessageBox::Ok);
     //foreach (QWidget *widget, QApplication::topLevelWidgets()) {

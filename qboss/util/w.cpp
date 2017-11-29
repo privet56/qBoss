@@ -35,6 +35,7 @@ QString w::getOpenFileName(QWidget* parent, QString sTitle, QString sPattern)
 }
 void w::killSubProcesses(qint64 pid, logger* pLogger)
 {
+#if defined(WIN32)
     // Take a snapshot of all processes in the system.
     //hProcessSnap = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
     // Take a snapshot of all modules in the specified process.
@@ -78,4 +79,7 @@ void w::killSubProcesses(qint64 pid, logger* pLogger)
     {
         if(pLogger)pLogger->err("could not list child processes to be closed");
     }
+#else
+    if(pLogger)pLogger->err("function killSubProcesses is not supported on non-windows!");
+#endif
 }
