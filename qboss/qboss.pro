@@ -6,7 +6,15 @@
 
 QT       += core gui webenginewidgets
 
+##if using platforms/qwebgl.dll with QML apps,
+##1) QT += websockets
+##2) call the built app with:
+####set QSG_RENDER_LOOP=threaded
+####qboss.exe -platform webgl:port=8088
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+win32: LIBS += -luser32
 
 TARGET = qboss
 TEMPLATE = app
@@ -48,7 +56,8 @@ SOURCES += \
     views/configview.cpp \
     views/configviewappserverconfig.cpp \
     views/configviewdeployview.cpp \
-    views/configviewtempdirview.cpp
+    views/configviewtempdirview.cpp \
+    util/logwndcontrol.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -76,14 +85,16 @@ HEADERS += \
     views/configview.h \
     views/configviewappserverconfig.h \
     views/configviewdeployview.h \
-    views/configviewtempdirview.h
+    views/configviewtempdirview.h \
+    util/logwndcontrol.h
 
 HEADERS  += resource.h
 
 FORMS += \
         mainwindow.ui \
     tabbrowser.ui \
-    tabsettings.ui
+    tabsettings.ui \
+    util/logwndcontrol.ui
 
 RESOURCES += \
     res.qrc

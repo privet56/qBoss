@@ -10,11 +10,10 @@
 #include "util/tray.h"
 #include "util/f.h"
 
-//TODO: ensure try icon is removed on app close
 //TODO: cleanup webapps/?temp? & webapps/[warnameWithoutExt] folder too before deploy
 //TODO: hold taskbar icon synchron to the appserver.running state
-//TODO: support https
 //TODO: watcher & configController
+//TODO: make log wnd configurable (checkbox: stdout/stderr on/off)  //later: allow regexp
 
 int main(int argc, char *argv[])
 {

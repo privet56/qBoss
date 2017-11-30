@@ -10,7 +10,7 @@ bool AppServerTempDirController::ok()
    if(!this->active())return true;
 
    QList<QString> lsTempDirs = this->GetTempDirs();
-   for(int i=0;i<lsTempDirs.size();i++)
+   for(int i=0;i< lsTempDirs.size();i++)
    {
        QString sAppServerTempDir(lsTempDirs.at(i));
        if(!str::isempty(sAppServerTempDir) && f::exists(sAppServerTempDir))
@@ -40,7 +40,7 @@ bool AppServerTempDirController::action()
         QString sAppServerTempDir(lsTempDirs.at(i));
         if(str::isempty(sAppServerTempDir) || !f::exists(sAppServerTempDir))
         {
-            this->m_pLogger->wrn("cannot access app server temp dir '"+sAppServerTempDir+"'");
+            //this->m_pLogger->wrn("cannot access app server temp dir '"+sAppServerTempDir+"'");
             continue;
         }
         if(!f::emptydir(sAppServerTempDir, this->m_pLogger))
@@ -55,6 +55,6 @@ bool AppServerTempDirController::action()
     {
         return true;
     }
-    this->m_pLogger->err("cannot access app server temp dirs");
+    this->m_pLogger->err("cannot access app server temp dirs for '"+this->m_pAppServerController->GetAppServerStartScript()+"'");
     return false;
 }

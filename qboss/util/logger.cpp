@@ -8,6 +8,9 @@
 #include "emitter.h"
 #include "logwnd.h"
 
+QString logger::PREFIX_STDOUT = "1>";
+QString logger::PREFIX_STDERR = "2>";
+
 logger::logger(cfg* pCfg, LogWnd* pTeLog, QObject *parent) : QObject(parent), m_pCfg(pCfg)
 {
     qRegisterMetaType<logger::LogLevel>();

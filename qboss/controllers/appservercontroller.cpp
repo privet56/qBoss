@@ -90,14 +90,14 @@ void AppServerController::onProcessReadyReadStdOutput()
     QProcess* p = (QProcess*)sender();
     QString s = p->readAllStandardOutput();
     s = s.trimmed();
-    this->m_pLogger->inf("STDOUT:'"+s+"'");
+    this->m_pLogger->inf(logger::PREFIX_STDOUT+s);
 }
 void AppServerController::onProcessReadyReadStdErr()
 {
     QProcess* p = (QProcess*)sender();
     QString s = p->readAllStandardError();
     s = s.trimmed();
-    this->m_pLogger->err("STDERR:'"+s+"'");
+    this->m_pLogger->err(logger::PREFIX_STDERR+s);
 }
 void AppServerController::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {

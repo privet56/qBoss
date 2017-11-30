@@ -6,6 +6,8 @@
 #include <QStatusBar>
 #include "logger.h"
 
+class LogWndControl;
+
 class LogWnd : public QTextEdit
 {
     Q_OBJECT
@@ -16,6 +18,8 @@ public:
 
 protected:
     QStatusBar* m_pStatusBar;
+    LogWndControl* m_pLogWndControl;
+    void resizeEvent(QResizeEvent *event);
 
 signals:
 

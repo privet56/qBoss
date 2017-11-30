@@ -15,7 +15,10 @@ public:
     //see also on the bottom
     Q_ENUMS(LogLevel)
     enum LogLevel { DBG, INF, WRN, ERR };
-
+public:
+    static QString PREFIX_STDOUT;
+    static QString PREFIX_STDERR;
+public:
     void SetLogWnd(LogWnd* pTeLog);
     void init(cfg* pCfg, LogWnd* pTeLog);
     cfg* GetCfg();

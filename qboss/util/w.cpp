@@ -33,7 +33,25 @@ QString w::getOpenFileName(QWidget* parent, QString sTitle, QString sPattern)
 
     return sAbsFN;
 }
-void w::killSubProcesses(qint64 pid, logger* pLogger)
+
+#if defined(WIN32)
+//#pragma commment(lib, "user32.lib")   =   pro:win32: LIBS += -luser32
+BOOL CALLBACK EnumThreadWndProcAndClose(HWND hwnd, LPARAM lParam)
+{
+    Q_UNUSED(lParam)
+
+#ifdef _DEBUG
+    char WindowTitle[1024];
+    ::GetWindowText(hwnd, (LPWSTR)WindowTitle, 1024);
+    qDebug() << WindowTitle;
+#endif
+
+    SendMessage(hwnd, WM_CLOSE, 0, 0);
+    return TRUE;
+}
+#endif
+
+void w::killSubProcesses(qint64 pid, logger* pLogger, int iRecDepth/*=0*/)
 {
 #if defined(WIN32)
     // Take a snapshot of all processes in the system.
@@ -57,18 +75,22 @@ void w::killSubProcesses(qint64 pid, logger* pLogger)
                 {
                     //qDebug() << QString::fromWCharArray(processEntry32.szExeFile);
 
-                    w::killSubProcesses(processEntry32.th32ProcessID, pLogger);  //recurse
+                    //although, children "conhost.exe" & "java.exe" do not have hwnds...
+                    ::EnumThreadWindows(processEntry32.th32ProcessID, EnumThreadWndProcAndClose, NULL);
+
+                    w::killSubProcesses(processEntry32.th32ProcessID, pLogger, iRecDepth+1);  //recurse
 
                     HANDLE hChildProc = ::OpenProcess(PROCESS_ALL_ACCESS, FALSE, processEntry32.th32ProcessID);
-                   if (hChildProc)
-                   {
+
+                    if (hChildProc)
+                    {
                        ::TerminateProcess(hChildProc, 1);
                        ::CloseHandle(hChildProc);
-                   }
-                   else
-                   {
+                    }
+                    else
+                    {
                        if(pLogger)pLogger->err("process couldn't be closed:"+QString::fromWCharArray(processEntry32.szExeFile));
-                   }
+                    }
                 }
             }
             while(Process32Next(hProcessSnap, &processEntry32)) ;
@@ -79,6 +101,12 @@ void w::killSubProcesses(qint64 pid, logger* pLogger)
     {
         if(pLogger)pLogger->err("could not list child processes to be closed");
     }
+
+    if(iRecDepth == 0)
+    {
+        ::EnumThreadWindows(pid, EnumThreadWndProcAndClose, NULL);
+    }
+
 #else
     if(pLogger)pLogger->err("function killSubProcesses is not supported on non-windows!");
 #endif
