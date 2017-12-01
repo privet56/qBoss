@@ -21,6 +21,7 @@ protected:
     QString m_sWarAbsFN2Deploy;
     bool m_bWatch;
     QString getAppServerWebAppsDir();
+    bool cleanupDeployedWarDir(QString sAbsFNDeployedWar);
 };
 
 #endif // APPSERVERDEPLOYCONTROLLER_H

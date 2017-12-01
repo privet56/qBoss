@@ -40,7 +40,7 @@ bool AppServerTempDirController::action()
         QString sAppServerTempDir(lsTempDirs.at(i));
         if(str::isempty(sAppServerTempDir) || !f::exists(sAppServerTempDir))
         {
-            //this->m_pLogger->wrn("cannot access app server temp dir '"+sAppServerTempDir+"'");
+            //this->m_pLogger->wrn("cannot access app server temp dir '"+sAppServerTempDir+"'");    //this can be a normal case!
             continue;
         }
         if(!f::emptydir(sAppServerTempDir, this->m_pLogger))
