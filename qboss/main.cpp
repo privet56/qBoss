@@ -10,10 +10,10 @@
 #include "util/tray.h"
 #include "util/f.h"
 
-//TODO: cleanup webapps/?temp? & webapps/[warnameWithoutExt] folder too before deploy
-//TODO: hold taskbar icon synchron to the appserver.running state
+//TODO: cleanup webapps/?temp? & webapps/[warnameWithoutExt] folder too before deploy       //ok, later: check for jboss/tomee: webapps/[warnameWithoutExt]-temp?
+//TODO: hold taskbar icon synchron to the appserver.running state                           //need: strong-meaningful bunny_sleep.gif
 //TODO: watcher & configController
-//TODO: make log wnd configurable (checkbox: stdout/stderr on/off)  //later: allow regexp
+//TODO: make log wnd configurable (checkbox: stdout/stderr on/off)                          //ok, later: allow regexp
 
 int main(int argc, char *argv[])
 {
