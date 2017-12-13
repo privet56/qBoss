@@ -7,3 +7,7 @@ GUI :
 
 ![qboss_ui](https://raw.githubusercontent.com/privet56/qBoss/master/qboss_ui.gif)
 ![qboss_ui2](https://raw.githubusercontent.com/privet56/qBoss/master/qboss_ui.2.gif)
+
+//TODO:
+// 1) Tab: DB Search
+// 2) Tab: Performance Graph
