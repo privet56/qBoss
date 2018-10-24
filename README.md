@@ -94,9 +94,11 @@ GUI :
 		signals:
 			void onGo();
 			void propChanged();
-		
-		qmlRegisterType<cm::controllers::MasterController>("MyApp", 1, 0, "MasterController");	# navigation controller similarly
+		# eg. in main.cpp:
+		qmlRegisterType<cm::controllers::MasterController>("MyApp", 1, 0, "MasterController");	# naviCtrl similarly
 		engine.rootContext()->setContextProperty("masterController", &masterController);
+		# import in QML
+		import CM 1.0
 	-- use centralized Style.qml:
 		pragma Singleton
 		import QtQuick 2.9
@@ -160,6 +162,7 @@ GUI :
 				PropertyChanges {
 					target: background
 					color: hoverColour		#whereby: property color hoverColour: Style.colourNavigationBarBackground
+					color: Qt.darker(Style.colourCommandBarBackground)
 					
 		Usage:
 			MouseArea {
@@ -169,6 +172,11 @@ GUI :
 				onEntered: background.state = "hover"
 				onExited: background.state = ""
 				onClicked: NaviBtnClicked()
+
+	-- List alternative: use Repeater:
+		Repeater {
+			delegate: CommandButton {
+				command: modelData
 
 				
 ## git CheatSheet
