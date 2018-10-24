@@ -87,11 +87,13 @@ GUI :
 		}
 	-- use C++ Controller (parent: QObject):
 		Q_OBJECT
-		Q_PROPERTY(QString ui_msg MEMBER msg CONSTANT)
+		Q_PROPERTY(QString ui_msg MEMBER msg CONSTANT)	#macros: MEMBER,READ,NOTIFY propChanged
 		Q_PROPERTY( my::controllers::NavigationController* ui_navigationController READ navigationController CONSTANT )
+		Q_PROPERTY(QQmlListProperty< ...
 		const QString& msg() const;
 		signals:
-			onGoCreateClientView:
+			void onGo();
+			void propChanged();
 		
 		qmlRegisterType<cm::controllers::MasterController>("MyApp", 1, 0, "MasterController");	# navigation controller similarly
 		engine.rootContext()->setContextProperty("masterController", &masterController);
@@ -131,6 +133,7 @@ GUI :
 				Text {
 					color: "#ffffff"
 					text: "Home"
+					verticalAlignment: Text.AlignVCenter
 				}
 	-- build components, eg NaviBtn.qml:
 		Item {
