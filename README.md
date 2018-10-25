@@ -87,7 +87,7 @@ GUI :
 		}
 	-- use C++ Controller (parent: QObject):
 		Q_OBJECT
-		Q_PROPERTY(QString ui_msg MEMBER msg CONSTANT)	#macros: MEMBER,READ,NOTIFY propChanged
+		Q_PROPERTY(QString ui_msg MEMBER msg CONSTANT)	#macros: MEMBER,READ,WRITE,NOTIFY propChanged
 		Q_PROPERTY( my::controllers::NavigationController* ui_navigationController READ navigationController CONSTANT )
 		Q_PROPERTY(QQmlListProperty< ...
 		const QString& msg() const;
@@ -178,7 +178,16 @@ GUI :
 			delegate: CommandButton {
 				command: modelData
 
-				
+## QT C++ Hints
+	-- instead of plain pointer, use QScopedPointer<CLASSNAME>
+	-- QtTest:
+		useful macros: Q_SLOTS, QVERIFY/2, QCOMPARE; QVERIFY_EXCEPTION_THROWN, QTEST_APPLESS_MAIN
+		use XML configuration for test suite: <testsuite ..<testcase ...
+		use QSignalSpy:
+			QSignalSpy valueChangedSpy(&myobj, &myclass::valueChanged);
+			myobj.setValue(99);
+			QCOMPARE(valueChangedSpy.count(), 1);
+
 ## git CheatSheet
 	--- global settings ---
 	$ git config --global user.name "privet"
