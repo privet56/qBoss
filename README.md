@@ -65,8 +65,9 @@ GUI :
 ## Qt QML CheatSheet
 	-- # Additional import path used to resolve QML modules in Qt Creator's code model
 		QML_IMPORT_PATH = $$PWD
-	-- You need exchangeable content? Use StackView(has history):
+	-- You need exchangeable content? Use StackView(has history: .pop/.push/.replace):
 		StackView {
+			id: contentFrame
 			clip: true
 			InitialItem: Qt.resolvedUrl("qrc:/splashview.qml")
 			Component.onCompleted: contentFrame.replace("qrc:/views/DashboardView.qml");
@@ -74,8 +75,11 @@ GUI :
 			Connections {
 				target: masterController.ui_navigationController
 				onGo: contentFrame.replace("qrc:/views/CreateClientView.qml")
+		Usage: 
+			onClicked:
+				contentFrame.push("qrc:/SecondView.qml", {attr1: myattr1, attr2: myattr2})
 
-	-- Use always relative positioning, with anchors, like
+	-- Use always relative positioning (to reach a responsive UI), with anchors, like
 		anchors.centerIn: parent
 		anchors.fill: parent
 		anchors.top: parent.top
@@ -95,10 +99,12 @@ GUI :
 			void onGo();
 			void propChanged();
 		# eg. in main.cpp:
-		qmlRegisterType<cm::controllers::MasterController>("MyApp", 1, 0, "MasterController");	# naviCtrl similarly
+		qmlRegisterType<my::controllers::MasterController>("MyApp", 1, 0, "MasterController");	# naviCtrl similarly
+		#or, with interfaces:
+		qmlRegisterUncreatableType<my::controllers::IMasterController>("MyApp", 1, 0, "IMasterController", "Interface");
 		engine.rootContext()->setContextProperty("masterController", &masterController);
 		# import in QML
-		import CM 1.0
+		import MyApp 1.0
 	-- use centralized Style.qml:
 		pragma Singleton
 		import QtQuick 2.9
@@ -177,9 +183,37 @@ GUI :
 		Repeater {
 			delegate: CommandButton {
 				command: modelData
+	
+	-- Load QML content dynamically, with Loader:
+		MyPanel.qml:
+		Item {
+			property alias contentComponent: contentLoader.sourceComponent
+			# Header...
+			Loader {
+				id: contentLoader
+				anchors {
+					...
+		Usage:
+		MyPanel {
+			# set Header attribs...
+			contentComponent:
+				Column {
+					...
+
+	-- Access Qt.<globalScope> functionality in QML this way:
+		Text { text: Qt.formatDateTime(rssItem.ui_pubDate, "ddd, d MMM yyyy @ h:mm ap")
+		Qt.openUrlExternally(rssItem.ui_link);
+		Qt.AlignVCenter
+		
+	-- Alternative to ListView { delegate: my model: my :
+		Flow { Repeater { delegate: my model: my
 
 ## QT C++ Hints
 	-- instead of plain pointer, use QScopedPointer<CLASSNAME>
+	-- with CONFIG += c++14, use lambdas:
+		QObject::connect(&myobj, &myclass::valueChanged, [&isCalled](){
+			isCalled = true;
+		});
 	-- QtTest:
 		useful macros: Q_SLOTS, QVERIFY/2, QCOMPARE; QVERIFY_EXCEPTION_THROWN, QTEST_APPLESS_MAIN
 		use XML configuration for test suite: <testsuite ..<testcase ...
@@ -187,6 +221,12 @@ GUI :
 			QSignalSpy valueChangedSpy(&myobj, &myclass::valueChanged);
 			myobj.setValue(99);
 			QCOMPARE(valueChangedSpy.count(), 1);
+	-- packaging:
+		MacOS: macdeployqt -qmldir -libpath
+			if manually, command line tools helping;
+				otool (~ldd on linux), install_name_tool -change -id
+		Linux: export PATH=<Qt-Path>/5.9.1/gcc_64/bin/:$PATH linuxdeployqt -qmldir -appimage
+		Windows: qindeployqt --qmldir --compiler-runtime
 
 ## git CheatSheet
 	--- global settings ---
