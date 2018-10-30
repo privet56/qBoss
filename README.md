@@ -61,6 +61,7 @@ GUI :
 			myapp-ui \
 			myapp-lib \
 			myapp-tests
+		myapp-ui.depends = myapp-lib
 
 ## Qt QML CheatSheet
 	-- # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -226,7 +227,7 @@ GUI :
 			if manually, command line tools helping;
 				otool (~ldd on linux), install_name_tool -change -id
 		Linux: export PATH=<Qt-Path>/5.9.1/gcc_64/bin/:$PATH linuxdeployqt -qmldir -appimage
-		Windows: qindeployqt --qmldir --compiler-runtime
+		Windows: windeployqt --qmldir --compiler-runtime
 
 ## git CheatSheet
 	--- global settings ---
