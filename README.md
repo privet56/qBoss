@@ -5,7 +5,7 @@
 GUI :
 #####
 
-<img src="qboss_ui.gif" height="400"><img src="qboss_ui.2.gif" height="400">
+<img src="qboss_ui.gif" height="405"><img src="qboss_ui.2.gif" height="400">
 
 ## TODO:
 	1) Tab: DB Search
