@@ -5,14 +5,14 @@
 GUI :
 #####
 
-![qboss_ui](https://raw.githubusercontent.com/privet56/qBoss/master/qboss_ui.gif)
-![qboss_ui2](https://raw.githubusercontent.com/privet56/qBoss/master/qboss_ui.2.gif)
+<img src="qboss_ui.gif" width="550">
+<img src="qboss_ui.2.gif" width="550">
 
 ## TODO:
 	1) Tab: DB Search
 	2) Tab: Performance Graph
 
-#.
+# .
 
 ### General Qt cheatsheet:
 [Qt-cheatsheet](https://github.com/privet56/qBoss/blob/master/qt_cheatsheet.md)
