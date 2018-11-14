@@ -12,8 +12,7 @@ GUI :
 	1) Tab: DB Search
 	2) Tab: Performance Graph
 
+#.
 
-	
-
-General Qt cheatsheet:
-[Qt-cheatsheet](https://raw.githubusercontent.com/privet56/qBoss/master/qt_cheatsheet.md)
+### General Qt cheatsheet:
+[Qt-cheatsheet](https://github.com/privet56/qBoss/blob/master/qt_cheatsheet.md)
