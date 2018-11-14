@@ -5,8 +5,8 @@
 GUI :
 #####
 
-<img src="qboss_ui.gif" width="550">
-<img src="qboss_ui.2.gif" width="550">
+<img src="qboss_ui.gif" width="350">
+<img src="qboss_ui.2.gif" width="350">
 
 ## TODO:
 	1) Tab: DB Search
@@ -14,5 +14,5 @@ GUI :
 
 # .
 
-### General Qt cheatsheet:
+### Qt cheatsheet:
 [Qt-cheatsheet](https://github.com/privet56/qBoss/blob/master/qt_cheatsheet.md)
