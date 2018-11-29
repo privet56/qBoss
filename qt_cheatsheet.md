@@ -236,3 +236,12 @@
 	$ git add .
 	$ git commit -m "new feature"
 	$ git push origin master
+
+	--- versioning/merging ---
+	$ git checkout master
+	$ git merge <my-branch>		#merges branch into current branch (master)
+	$ git push origin master
+	$ git tag 1.0.0				#tagging can trigger CI/CD pipeline
+	$ git push origin --tags
+	
+	//TODO: rebase
