@@ -15,3 +15,6 @@ GUI :
 
 ### Qt cheatsheet:
 [Qt-cheatsheet](https://github.com/privet56/qBoss/blob/master/qt_cheatsheet.md)
+
+### Qt-for-android Guide:
+[Qt-for-android](https://github.com/privet56/qBoss/blob/master/qt4android_hints/qt4android_hints_for_beginners.pdf)
