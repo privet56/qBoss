@@ -243,5 +243,11 @@
 	$ git push origin master
 	$ git tag 1.0.0				#tagging can trigger CI/CD pipeline
 	$ git push origin --tags
+	$ git diff					# lists local changes since last commit
+	# no valid command, until you set it with >git config alias.cam "commit -a -m"<
+	$ git cam 'my msg'			# add *and* commit
+
+	# https://hub.github.com/ = hub is an extension to command-line git that helps you do everyday GitHub tasks without ever leaving the terminal
+	$ hub pull-request			# creates a pull request (PR = pull-request)
 	
 	//TODO: rebase
